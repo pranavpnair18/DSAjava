@@ -21,7 +21,7 @@ public class compr {
             count=0;
         }
       }
-   System.out.println(compress);
+   System.out.println(compress+ "nice one");
 
     }
 }

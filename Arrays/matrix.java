@@ -2,51 +2,48 @@ package Arrays;
 
 public class matrix {
     public static void main(String[] args) {
-        int[][] matrix={
-            {1,2,3},
-            {4,5,6},
-            {7,8,0}
+        int[][] matrix = {
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 0}
         };
-        check(matrix);
-    }    
-    public static void check(int[][] matrix)
-    {
-         int m = matrix.length;
-         int n =matrix[0].length;
 
+        setZeroes(matrix);  // Call the function that modifies the matrix
 
-     for(int i=0;i<m;i++)
-     {
-        for(int j=0;j<n;j++)
-        {
-            if(matrix[i][j]==0)
-            {
-                modify(matrix,m,n,i,j);
-            }
-        }
-     }
-    }
-    public static void modify(int[][] matrix, int m, int n,int i, int j)
-    {
-        int[][] matrix2= new int[m][n];
-        for(int x=0;x<m;x++)
-        {
-            for(int y=0;y<n;y++)
-            {
-                if(x!=i && y!=j)
-                {
-                    matrix2[x][y]=matrix[x][y];
-                }
-                else{
-                    matrix2[x][y]=0;
-                }
-            }
-        }
-        for (int x = 0; x < m; x++) {
-            for (int y = 0; y < n; y++) {
-                System.out.print(matrix2[x][y] + "\t");
+        // Print the modified matrix
+        for (int[] row : matrix) {
+            for (int val : row) {
+                System.out.print(val + "\t");
             }
             System.out.println();
+        }
+    }
+
+    public static void setZeroes(int[][] matrix) {
+        int m = matrix.length;       // Number of rows
+        int n = matrix[0].length;    // Number of columns
+
+        // Step 1: Create two arrays to mark rows and columns to be zeroed
+        boolean[] row = new boolean[m];  // row[i] is true if row i should be zero
+        boolean[] col = new boolean[n];  // col[j] is true if column j should be zero
+
+        // Step 2: Traverse the matrix to find zeroes
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == 0) {
+                    row[i] = true;  // Mark this row
+                    col[j] = true;  // Mark this column
+                }
+            }
+        }
+
+        // Step 3: Traverse again and set elements to zero if they are in a marked row or column
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (row[i] || col[j]) {
+                    matrix[i][j] = 0;
+                }
+            }
         }
     }
 }
